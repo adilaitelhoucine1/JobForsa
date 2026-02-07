@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "server": "json-server --watch db.json --port 3000",
     "serve:ssr:JobForsa": "node dist/JobForsa/server/server.mjs"
   },
   "prettier": {
@@ -44,6 +45,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
+    "json-server": "^1.0.0-beta.5",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",
