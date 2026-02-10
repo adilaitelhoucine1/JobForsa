@@ -1,24 +1,30 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "firstName": "Adil",
       "lastName": "Ait El Houcine",
-      "email": "adil@test.com",
+      "email": "adilaitelhoucine1@gmail.com",
       "password": "123456"
     },
     {
-      "id": 2,
+      "id": "2",
       "firstName": "Sara",
       "lastName": "El Amrani",
       "email": "sara@test.com",
       "password": "password"
+    },
+    {
+      "id": "3",
+      "firstName": "lhcn",
+      "lastName": "Ait El Houcine",
+      "email": "lhcn@test.com",
+      "password": "123456"
     }
   ],
-
   "favoritesOffers": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "offerId": "adzuna-101",
       "title": "Angular Frontend Developer",
@@ -26,7 +32,7 @@
       "location": "Casablanca"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "offerId": "remotive-202",
       "title": "Full Stack Java Developer",
@@ -34,7 +40,7 @@
       "location": "Remote"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 2,
       "offerId": "adzuna-303",
       "title": "Junior Web Developer",
@@ -42,10 +48,9 @@
       "location": "Rabat"
     }
   ],
-
   "applications": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1,
       "offerId": "adzuna-101",
       "apiSource": "adzuna",
@@ -58,7 +63,7 @@
       "dateAdded": "2026-02-10T10:30:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 1,
       "offerId": "remotive-202",
       "apiSource": "remotive",
@@ -71,7 +76,7 @@
       "dateAdded": "2026-02-08T14:15:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": 2,
       "offerId": "adzuna-303",
       "apiSource": "adzuna",
