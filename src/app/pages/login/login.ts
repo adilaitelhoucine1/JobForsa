@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {LoginRequest} from '../../dto/LoginRequest';
+import {LoginRequest} from '../../dto/auth/LoginRequest';
 import * as AuthActions from '../../store/auth/actions.auth';
 import { selectAuthError, selectAuthLoading, selectIsAuthenticated } from '../../store/auth/selectors.auth';
 import { Router } from '@angular/router';

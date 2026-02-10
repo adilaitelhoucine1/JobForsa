@@ -25,6 +25,52 @@ export class AuthEffects {
     )
   );
 
+  register$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.register),
+      switchMap((action) =>
+        this.authService.register(action).pipe(
+          map((user) => AuthActions.registerSuccess({ user })),
+          catchError((error) =>
+            of(AuthActions.registerFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap(() => {
+        this.router.navigate(['/']);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  registerSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.registerSuccess),
+      tap(() => {
+        this.router.navigate(['/']);
+      })
+    ),
+    { dispatch: false }
+  );
+
+  updateProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateProfile),
+      switchMap(({ userId, userData }) =>
+        this.authService.updateProfile(userId, userData).pipe(
+          map(user => AuthActions.updateProfileSuccess({ user })),
+          catchError(error => of(AuthActions.updateProfileFailure({ error: error.message })))
+        )
+      )
+    )
+  );
+
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logout),

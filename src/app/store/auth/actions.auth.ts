@@ -1,7 +1,8 @@
 import {createAction, props} from '@ngrx/store';
 import {UserResponse} from '../../dto/UserResponse';
-import {LoginRequest} from '../../dto/LoginRequest';
-import {RegisterRequest} from '../../dto/RegisterRequest';
+import {LoginRequest} from '../../dto/auth/LoginRequest';
+import {RegisterRequest} from '../../dto/auth/RegisterRequest';
+import {UpdateProfileRequest} from '../../dto/profile/UpdateProfileRequest';
 
 
 export const login =  createAction(
@@ -39,3 +40,17 @@ export const loadUserFromStorage = createAction(
   props<{user: UserResponse}>()
 )
 
+
+ export  const  updateProfile = createAction(
+   "[Profile ]  update profile ",
+   props<{userId : number , userData : UpdateProfileRequest}>()
+ )
+ export  const  updateProfileSuccess= createAction(
+   "[Profile ] update Profile Success" ,
+   props<{user : UserResponse}>()
+ )
+
+ export  const  updateProfileFailure= createAction(
+   "[Profile]  update Profile Failure",
+   props<{error :string}>()
+ )

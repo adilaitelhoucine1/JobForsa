@@ -1,11 +1,11 @@
 {
   "users": [
     {
-      "id": "1",
-      "firstName": "Adil",
+      "firstName": "adil",
       "lastName": "Ait El Houcine",
       "email": "adilaitelhoucine1@gmail.com",
-      "password": "123456"
+      "id": "1",
+      "password": "password"
     },
     {
       "id": "2",
@@ -20,6 +20,14 @@
       "lastName": "Ait El Houcine",
       "email": "lhcn@test.com",
       "password": "123456"
+    },
+    {
+      "id": 4092,
+      "firstName": "Adil",
+      "lastName": "Ait Elhoucine",
+      "email": "adil@test.com",
+      "password": "adiladil123",
+      "type": "[Auth] register"
     }
   ],
   "favoritesOffers": [

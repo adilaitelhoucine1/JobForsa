@@ -65,5 +65,22 @@ export  const initialState : authState={
     isAuthenticated: true,
     loading: false,
     error: null
-  }))
+  })),
+
+   on(AuthActions.updateProfile, state => ({
+      ...state,
+      loading: true,
+      error: null
+   })),
+   on(AuthActions.updateProfileSuccess, (state, { user }) => ({
+        ...state,
+        user,
+        loading: false,
+        error: null
+   })),
+   on(AuthActions.updateProfileFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
+   }))
  )
