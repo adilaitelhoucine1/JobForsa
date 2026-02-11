@@ -29,7 +29,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.register),
       switchMap((action) =>
-        this.authService.register(action).pipe(
+        this.authService.register(action.payload).pipe(
           map((user) => AuthActions.registerSuccess({ user })),
           catchError((error) =>
             of(AuthActions.registerFailure({ error: error.message }))

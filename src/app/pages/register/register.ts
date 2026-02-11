@@ -37,10 +37,12 @@ export class Register {
     if (this.registerForm.valid) {
       const { firstName, lastName, email, password } = this.registerForm.value;
       this.store.dispatch(AuthActions.register({
-        firstName,
-        lastName,
-        email,
-        password
+        payload: {
+          firstName,
+          lastName,
+          email,
+          password
+        }
       }));
     } else {
       this.registerForm.markAllAsTouched();

@@ -26,8 +26,14 @@
       "firstName": "Adil",
       "lastName": "Ait Elhoucine",
       "email": "adil@test.com",
-      "password": "adiladil123",
-      "type": "[Auth] register"
+      "password": "adiladil123"
+    },
+    {
+      "id": 3990,
+      "firstName": "Maxwell",
+      "lastName": "Bray",
+      "email": "caxilot@mailinator.com",
+      "password": "Pa$$w0rd!"
     }
   ],
   "favoritesOffers": [

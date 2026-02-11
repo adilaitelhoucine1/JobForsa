@@ -21,7 +21,7 @@ export const  loginSuccess= createAction(
 
 export  const register = createAction(
   "[Auth] register",
-  props<RegisterRequest>()
+  props<{ payload: RegisterRequest }>()
 )
 export  const  registerSuccess =  createAction(
   "[Auth] register success",
