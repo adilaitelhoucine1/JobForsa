@@ -22,14 +22,14 @@
       "password": "123456"
     },
     {
-      "id": 4092,
+      "id": "4092",
       "firstName": "Adil",
       "lastName": "Ait Elhoucine",
       "email": "adil@test.com",
       "password": "adiladil123"
     },
     {
-      "id": 3990,
+      "id": "3990",
       "firstName": "Maxwell",
       "lastName": "Bray",
       "email": "caxilot@mailinator.com",
@@ -38,28 +38,12 @@
   ],
   "favoritesOffers": [
     {
-      "id": "1",
+      "id": "cefe",
       "userId": 1,
-      "offerId": "adzuna-101",
-      "title": "Angular Frontend Developer",
-      "company": "Tech Solutions",
-      "location": "Casablanca"
-    },
-    {
-      "id": "2",
-      "userId": 1,
-      "offerId": "remotive-202",
-      "title": "Full Stack Java Developer",
-      "company": "Remote Corp",
-      "location": "Remote"
-    },
-    {
-      "id": "3",
-      "userId": 2,
-      "offerId": "adzuna-303",
-      "title": "Junior Web Developer",
-      "company": "Startup Hub",
-      "location": "Rabat"
+      "offerId": "722102800",
+      "title": "Cyber Threat Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia"
     }
   ],
   "applications": [

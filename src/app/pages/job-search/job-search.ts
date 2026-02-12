@@ -1,13 +1,14 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal, inject} from '@angular/core';
 import { JobCard } from '../../components/job-card/job-card';
 import { JobService   } from '../../services/jobService';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {JobOffer} from '../../model/offer';
 import {JobSearchParams} from '../../dto/jobOffer/JobSearchParams';
-import {sign} from 'node:crypto';
-import * as fs from 'node:fs';
+import * as FavoritesActions from '../../store/favorites/actions.favorites';
+import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
   selector: 'app-job-search',
@@ -26,12 +27,25 @@ export class JobSearch implements OnInit {
   currentPage: number = 1;
   resultsPerPage: number = 10;
 
+  private store = inject(Store);
+
   constructor(
     private jobService: JobService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    // Load user favorites
+    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+      if (user?.id) {
+        const userId = Number(user.id);
+        console.log('JobSearch: Loading favorites for user:', userId);
+        this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
+      } else {
+        console.log('JobSearch: No user logged in');
+      }
+    });
+
      this.route.queryParams.subscribe(params => {
       if (params['keyword']) {
         this.keyword = params['keyword'];

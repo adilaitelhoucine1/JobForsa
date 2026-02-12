@@ -8,6 +8,8 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import {authReducer} from './store/auth/reducer.auth';
 import {AuthEffects} from './store/auth/effects.auth';
+import { favoritesReducer } from './store/favorites/reducer.favorites';
+import { FavoritesEffects } from './store/favorites/effects.favorites';
 import { usaJobsInterceptor } from './interceptors/usajobs.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -20,9 +22,10 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([usaJobsInterceptor])
     ),
     provideStore({
-      auth:authReducer
+      auth: authReducer,
+      favorites: favoritesReducer
       }
     ),
-    provideEffects([AuthEffects])
+    provideEffects([AuthEffects, FavoritesEffects])
 ]
 };

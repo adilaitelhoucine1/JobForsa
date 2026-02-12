@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { JobCard } from '../../components/job-card/job-card';
 import { JobService } from '../../services/jobService';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import {JobOffer} from '../../model/offer';
+import * as FavoritesActions from '../../store/favorites/actions.favorites';
+import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
   selector: 'app-home',
@@ -18,12 +21,25 @@ export class Home implements OnInit {
   searchKeyword: string = '';
   searchLocation: string = '';
 
+  private store = inject(Store);
+
   constructor(
     private jobService: JobService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    // Load user favorites
+    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+      if (user?.id) {
+        const userId = Number(user.id);
+        console.log('Home: Loading favorites for user:', userId);
+        this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
+      } else {
+        console.log('Home: No user logged in');
+      }
+    });
+
     this.loadFeaturedJobs();
   }
 
