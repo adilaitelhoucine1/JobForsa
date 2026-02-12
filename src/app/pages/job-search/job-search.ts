@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import {JobOffer} from '../../model/offer';
 import {JobSearchParams} from '../../dto/jobOffer/JobSearchParams';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
+import * as ApplicationsActions from '../../store/applications/actions.applications';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
@@ -35,12 +36,13 @@ export class JobSearch implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Load user favorites
+    // Load user favorites and applications
     this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
       if (user?.id) {
         const userId = Number(user.id);
-        console.log('JobSearch: Loading favorites for user:', userId);
+        console.log('JobSearch: Loading favorites and applications for user:', userId);
         this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
+        this.store.dispatch(ApplicationsActions.loadApplications({ userId }));
       } else {
         console.log('JobSearch: No user logged in');
       }

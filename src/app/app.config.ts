@@ -10,6 +10,8 @@ import {authReducer} from './store/auth/reducer.auth';
 import {AuthEffects} from './store/auth/effects.auth';
 import { favoritesReducer } from './store/favorites/reducer.favorites';
 import { FavoritesEffects } from './store/favorites/effects.favorites';
+import { applicationsReducer } from './store/applications/reducer.applications';
+import { ApplicationsEffects } from './store/applications/effects.applications';
 import { usaJobsInterceptor } from './interceptors/usajobs.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -23,9 +25,10 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       auth: authReducer,
-      favorites: favoritesReducer
+      favorites: favoritesReducer,
+      applications: applicationsReducer
       }
     ),
-    provideEffects([AuthEffects, FavoritesEffects])
+    provideEffects([AuthEffects, FavoritesEffects, ApplicationsEffects])
 ]
 };

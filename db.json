@@ -44,35 +44,17 @@
       "title": "Cyber Threat Analyst",
       "company": "Central Intelligence Agency",
       "location": "Washington, District of Columbia"
+    },
+    {
+      "id": "4457",
+      "userId": 1,
+      "offerId": "722317000",
+      "title": "Resource Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia"
     }
   ],
   "applications": [
-    {
-      "id": "1",
-      "userId": 1,
-      "offerId": "adzuna-101",
-      "apiSource": "adzuna",
-      "title": "Angular Frontend Developer",
-      "company": "Tech Solutions",
-      "location": "Casablanca",
-      "url": "https://example.com/jobs/angular-frontend",
-      "status": "en_attente",
-      "notes": "Candidature envoyée via LinkedIn. Relancer après 2 semaines.",
-      "dateAdded": "2026-02-10T10:30:00Z"
-    },
-    {
-      "id": "2",
-      "userId": 1,
-      "offerId": "remotive-202",
-      "apiSource": "remotive",
-      "title": "Full Stack Java Developer",
-      "company": "Remote Corp",
-      "location": "Remote",
-      "url": "https://example.com/jobs/fullstack-java",
-      "status": "accepté",
-      "notes": "Entretien technique réussi.",
-      "dateAdded": "2026-02-08T14:15:00Z"
-    },
     {
       "id": "3",
       "userId": 2,
@@ -85,6 +67,45 @@
       "status": "refusé",
       "notes": "",
       "dateAdded": "2026-02-05T09:00:00Z"
+    },
+    {
+      "id": "c53f",
+      "userId": 1,
+      "offerId": "722102800",
+      "apiSource": "USAJobs",
+      "title": "Cyber Threat Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/722102800",
+      "status": "APPLIED",
+      "notes": "ff",
+      "dateAdded": "2026-02-12T15:30:34.816Z"
+    },
+    {
+      "id": "a96b",
+      "userId": 1,
+      "offerId": "722317000",
+      "apiSource": "USAJobs",
+      "title": "Resource Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/722317000",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-12T16:22:14.838Z"
+    },
+    {
+      "id": "0621",
+      "userId": 1,
+      "offerId": "723123400",
+      "apiSource": "USAJobs",
+      "title": "Technical Targeting Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/723123400",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-12T16:24:16.620Z"
     }
   ]
 }

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import {JobOffer} from '../../model/offer';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
+import * as ApplicationsActions from '../../store/applications/actions.applications';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
@@ -29,12 +30,13 @@ export class Home implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Load user favorites
+    // Load user favorites and applications
     this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
       if (user?.id) {
         const userId = Number(user.id);
-        console.log('Home: Loading favorites for user:', userId);
+        console.log('Home: Loading favorites and applications for user:', userId);
         this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
+        this.store.dispatch(ApplicationsActions.loadApplications({ userId }));
       } else {
         console.log('Home: No user logged in');
       }

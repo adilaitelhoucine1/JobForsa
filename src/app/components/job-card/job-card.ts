@@ -1,12 +1,16 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { JobOffer } from '../../model/offer';
 import { FavoriteOffer } from '../../model/favorite-offer';
+import { Application } from '../../model/application';
+import { ApplicationStatus } from '../../model/enum/ApplicationStatus';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
 import * as FavoritesSelectors from '../../store/favorites/selectors.favorites';
+import * as ApplicationsActions from '../../store/applications/actions.applications';
+import * as ApplicationsSelectors from '../../store/applications/selectors.applications';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
@@ -17,25 +21,29 @@ import * as AuthSelectors from '../../store/auth/selectors.auth';
 })
 export class JobCard implements OnInit {
   @Input() job?: JobOffer;
-  @Output() applyClicked = new EventEmitter<JobOffer>();
 
   private store = inject(Store);
   isFavorite$!: Observable<boolean>;
+  isTracked$!: Observable<boolean>;
   private currentUserId: number | null = null;
+  isAuthenticated$!: Observable<boolean>;
 
   ngOnInit() {
-    // Get current user ID
     this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
       this.currentUserId = user?.id ? Number(user.id) : null;
     });
 
-    // Check if this job is in favorites - this will update reactively
+    this.isAuthenticated$ = this.store.select(AuthSelectors.selectCurrentUser).pipe(
+      map(user => !!user)
+    );
+
     this.isFavorite$ = this.store.select(FavoritesSelectors.selectFavorites).pipe(
-      map(favorites => {
-        const isFav = favorites.some(fav => fav.offerId === this.job?.id);
-        console.log(`Job ${this.job?.id} is favorite:`, isFav, 'Favorites count:', favorites.length);
-        return isFav;
-      })
+      map(favorites => favorites.some(fav => fav.offerId === this.job?.id))
+    );
+
+    // Check if this job is already tracked in applications
+    this.isTracked$ = this.store.select(ApplicationsSelectors.selectApplications).pipe(
+      map(applications => applications.some(app => app.offerId === this.job?.id))
     );
   }
 
@@ -54,22 +62,17 @@ export class JobCard implements OnInit {
 
   toggleFavorite(): void {
     if (!this.job || !this.currentUserId) {
-      console.log('Cannot toggle favorite: missing job or user', { job: this.job?.id, userId: this.currentUserId });
       return;
     }
 
-    // Use take(1) to get current value and auto-unsubscribe
     this.store.select(FavoritesSelectors.selectFavorites).pipe(take(1)).subscribe(favorites => {
       const favoritesList: FavoriteOffer[] = favorites as FavoriteOffer[] || [];
       const existingFavorite = favoritesList.find((f: FavoriteOffer) => f.offerId === this.job?.id);
 
       if (existingFavorite) {
-        // Already in favorites - button should be disabled, so this shouldn't be called
-        console.log('Job already in favorites:', existingFavorite.id);
         return;
       }
 
-      // Add to favorites
       const favorite: FavoriteOffer = {
         userId: this.currentUserId!,
         offerId: this.job!.id,
@@ -77,14 +80,40 @@ export class JobCard implements OnInit {
         company: this.job!.company,
         location: this.job!.location
       };
-      console.log('Adding favorite:', favorite);
       this.store.dispatch(FavoritesActions.addFavorite({ favorite }));
     });
   }
 
-  onApply(): void {
-    if (this.job) {
-      this.applyClicked.emit(this.job);
+  trackApplication(): void {
+    if (!this.job || !this.currentUserId) {
+      return;
     }
+
+    this.store.select(ApplicationsSelectors.selectApplications).pipe(take(1)).subscribe(applications => {
+      const existingApplication = applications.find(app => app.offerId === this.job?.id);
+
+      if (existingApplication) {
+        return; // Already tracked
+      }
+
+      const application: Application = {
+        userId: this.currentUserId!,
+        offerId: this.job!.id,
+        apiSource: 'USAJobs',
+        title: this.job!.title,
+        company: this.job!.company,
+        location: this.job!.location,
+        url: this.job!.url || '',
+        status: ApplicationStatus.PENDING,
+        notes: '',
+        dateAdded: new Date().toISOString()
+      };
+      this.store.dispatch(ApplicationsActions.addApplication({ application }));
+    });
+  }
+
+  onApplyClick(): void {
+    // Automatically track the application when user clicks Apply Now
+    this.trackApplication();
   }
 }

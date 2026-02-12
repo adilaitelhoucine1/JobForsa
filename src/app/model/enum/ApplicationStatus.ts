@@ -1,5 +1,7 @@
 export enum ApplicationStatus {
-  EN_ATTENTE = 'en_attente',
-  ACCEPTE = 'accepte',
-  REFUSE = 'refuse'
+  PENDING = 'PENDING',
+  APPLIED = 'APPLIED',
+  INTERVIEW = 'INTERVIEW',
+  ACCEPTED = 'ACCEPTED',
+  REJECTED = 'REJECTED'
 }
