@@ -1,18 +1,18 @@
-<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-  <div class="container mx-auto px-6">
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+  <div class="container mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3 group">
-        <div class="w-9 h-9 flex items-center justify-center">
-          <img src="https://cdn-icons-png.flaticon.com/512/15189/15189337.png" alt="JobForsa" class="w-9 h-9 grayscale">
+      <a href="/" class="flex items-center space-x-2 sm:space-x-3 group">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+          <img src="https://cdn-icons-png.flaticon.com/512/15189/15189337.png" alt="JobForsa" class="w-8 h-8 sm:w-9 sm:h-9 grayscale">
         </div>
         <div class="flex items-center">
-          <span class="text-2xl font-black text-gray-900 tracking-tighter">Job</span>
-          <span class="text-2xl font-light text-gray-600 tracking-tight">Forsa</span>
+          <span class="text-xl sm:text-2xl font-black text-gray-900 tracking-tighter">Job</span>
+          <span class="text-xl sm:text-2xl font-light text-gray-600 tracking-tight">Forsa</span>
         </div>
       </a>
 
-      <!-- Navigation -->
+      <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center space-x-1">
         <a href="/" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
           Home
@@ -28,13 +28,10 @@
             Applications
           </a>
         }
-
       </nav>
 
-      <!-- Right Side Actions -->
-
-
-      <div class="flex items-center space-x-3">
+      <!-- Desktop Right Side Actions -->
+      <div class="hidden md:flex items-center space-x-3">
         @if (isAuthenticated$ | async) {
           <a href="/profile" class="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,8 +50,103 @@
             Sign Up
           </a>
         }
-
       </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        (click)="toggleMobileMenu()"
+        class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+        [attr.aria-expanded]="isMobileMenuOpen"
+        aria-label="Toggle menu"
+      >
+        @if (!isMobileMenuOpen) {
+          <!-- Hamburger Icon -->
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        } @else {
+          <!-- Close Icon -->
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        }
+      </button>
     </div>
+
+    <!-- Mobile Menu -->
+    @if (isMobileMenuOpen) {
+      <div class="md:hidden py-4 border-t border-gray-200 animate-fade-in">
+        <nav class="flex flex-col space-y-1">
+          <a
+            href="/"
+            (click)="closeMobileMenu()"
+            class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+             Home
+          </a>
+          <a
+            href="/jobs"
+            (click)="closeMobileMenu()"
+            class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+          >
+             Browse Jobs
+          </a>
+
+          @if (isAuthenticated$ | async) {
+            <a
+              href="/favorites"
+              (click)="closeMobileMenu()"
+              class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+            >
+              ️ Favorites
+            </a>
+            <a
+              href="/applications"
+              (click)="closeMobileMenu()"
+              class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+            >
+               Applications
+            </a>
+
+            <div class="border-t border-gray-200 my-2"></div>
+
+            <a
+              href="/profile"
+              (click)="closeMobileMenu()"
+              class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition flex items-center space-x-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              <span>Hello, {{(user$ | async)?.firstName}}</span>
+            </a>
+
+            <button
+              (click)="logout()"
+              class="mx-4 mt-2 px-4 py-3 bg-gray-900 text-white text-base font-medium rounded-lg hover:bg-gray-800 transition text-center"
+            >
+              Sign Out
+            </button>
+          } @else {
+            <div class="border-t border-gray-200 my-2"></div>
+
+            <a
+              href="/login"
+              (click)="closeMobileMenu()"
+              class="px-4 py-3 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
+            >
+               Sign In
+            </a>
+            <a
+              href="/register"
+              (click)="closeMobileMenu()"
+              class="mx-4 mt-2 px-4 py-3 bg-gray-900 text-white text-base font-medium rounded-lg hover:bg-gray-800 transition text-center"
+            >
+              Sign Up
+            </a>
+          }
+        </nav>
+      </div>
+    }
   </div>
 </header>

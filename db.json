@@ -45,6 +45,22 @@
       "title": "Targeting Officer",
       "company": "Central Intelligence Agency",
       "location": "Washington, District of Columbia"
+    },
+    {
+      "id": "6e01",
+      "userId": 3,
+      "offerId": "722102800",
+      "title": "Cyber Threat Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia"
+    },
+    {
+      "id": "c8ca",
+      "userId": 3,
+      "offerId": "722317000",
+      "title": "Resource Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia"
     }
   ],
   "applications": [
@@ -112,6 +128,32 @@
       "status": "PENDING",
       "notes": "",
       "dateAdded": "2026-02-13T11:19:32.115Z"
+    },
+    {
+      "id": "d365",
+      "userId": 3,
+      "offerId": "723123400",
+      "apiSource": "USAJobs",
+      "title": "Technical Targeting Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/723123400",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-14T19:43:12.517Z"
+    },
+    {
+      "id": "f89d",
+      "userId": 3,
+      "offerId": "722102800",
+      "apiSource": "USAJobs",
+      "title": "Cyber Threat Analyst",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/722102800",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-14T19:43:21.128Z"
     }
   ]
 }

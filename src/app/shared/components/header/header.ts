@@ -17,13 +17,23 @@ import * as AuthActions from '../../../store/auth/actions.auth';
 export class Header {
    isAuthenticated$ :Observable<boolean>;
    user$ : Observable<UserResponse | null> ;
+   isMobileMenuOpen = false;
 
    constructor(private store : Store) {
       this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
       this.user$ = this.store.select(selectCurrentUser);
    }
 
+   toggleMobileMenu(): void {
+     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+   }
+
+   closeMobileMenu(): void {
+     this.isMobileMenuOpen = false;
+   }
+
    logout(): void {
      this.store.dispatch(AuthActions.logout());
+     this.closeMobileMenu();
    }
 }
