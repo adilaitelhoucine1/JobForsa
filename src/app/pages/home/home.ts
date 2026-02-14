@@ -1,20 +1,20 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { JobCard } from '../../components/job-card/job-card';
+import { SearchBar } from '../../components/search-bar/search-bar';
+import { StatsCard } from '../../components/stats-card/stats-card';
 import { JobService } from '../../services/jobService';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import {JobOffer} from '../../model/offer';
+import { JobOffer } from '../../model/offer';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
 import * as ApplicationsActions from '../../store/applications/actions.applications';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
   selector: 'app-home',
-  imports: [JobCard, CommonModule, FormsModule],
+  imports: [JobCard, SearchBar, StatsCard, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -24,6 +24,12 @@ export class Home implements OnInit {
   searchKeyword: string = '';
   searchLocation: string = '';
 
+  stats = [
+    { value: '10K+', label: 'Active Jobs' },
+    { value: '5K+', label: 'Companies' },
+    { value: '50K+', label: 'Users' }
+  ];
+
   private store = inject(Store);
 
   constructor(
@@ -32,7 +38,7 @@ export class Home implements OnInit {
   ) {}
 
   ngOnInit(): void {
-     this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
+    this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       if (user?.id) {
         const userId = Number(user.id);
         this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
@@ -60,7 +66,6 @@ export class Home implements OnInit {
   }
 
   onSearch(): void {
-    // Navigate to job-search page with query params
     this.router.navigate(['/jobs'], {
       queryParams: {
         keyword: this.searchKeyword || undefined,

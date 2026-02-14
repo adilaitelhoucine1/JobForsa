@@ -1,23 +1,22 @@
-import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../model/user';
-import {map, Observable, tap} from 'rxjs';
-import {LoginRequest} from '../dto/auth/LoginRequest';
-import {RegisterRequest} from '../dto/auth/RegisterRequest';
-import {UserResponse} from '../dto/UserResponse';
-import {UpdateProfileRequest} from '../dto/profile/UpdateProfileRequest';
-import {isPlatformBrowser} from '@angular/common';
-
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../model/user';
+import { map, Observable, tap } from 'rxjs';
+import { LoginRequest } from '../dto/auth/LoginRequest';
+import { RegisterRequest } from '../dto/auth/RegisterRequest';
+import { UserResponse } from '../dto/UserResponse';
+import { UpdateProfileRequest } from '../dto/profile/UpdateProfileRequest';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
-export class AuthService{
- private apiUrl ='http://localhost:3000/users'
- private isBrowser: boolean;
+export class AuthService {
+  private apiUrl = 'http://localhost:3000/users';
+  private isBrowser: boolean;
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
     @Inject(PLATFORM_ID) platformId: object
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -25,22 +24,22 @@ export class AuthService{
 
   login(loginRequest: LoginRequest): Observable<UserResponse> {
     return this.http.get<User[]>(this.apiUrl).pipe(
-     map(users => {
+      map(users => {
         const user = users.find(u =>
-         u.email === loginRequest.email &&
-         u.password === loginRequest.password
-       );
+          u.email === loginRequest.email &&
+          u.password === loginRequest.password
+        );
 
-       if (!user) {
-         throw new Error('Invalid credentials');
-       }
+        if (!user) {
+          throw new Error('Invalid credentials');
+        }
 
-       const { password, ...userResponse } = user;
-       return userResponse as UserResponse;
-     }),
-     tap(userResponse => this.saveToStorage(userResponse))
-   );
- }
+        const { password, ...userResponse } = user;
+        return userResponse as UserResponse;
+      }),
+      tap(userResponse => this.saveToStorage(userResponse))
+    );
+  }
 
   register(registerRequest: RegisterRequest): Observable<UserResponse> {
     const newUser: User = {
@@ -81,27 +80,19 @@ export class AuthService{
   }
 
   getUserFromStorage(): UserResponse | null {
-    console.log('getUserFromStorage - isBrowser:', this.isBrowser);
-
     if (!this.isBrowser) {
-      console.log('getUserFromStorage - Not browser, returning null');
       return null;
     }
 
     const userStr = localStorage.getItem('user');
-    console.log('getUserFromStorage - userStr from localStorage:', userStr);
-
     if (userStr) {
       try {
-        const user = JSON.parse(userStr);
-        console.log('getUserFromStorage - Parsed user:', user);
-        return user;
+        return JSON.parse(userStr);
       } catch (error) {
-        console.log('getUserFromStorage - Parse error:', error);
+        console.error('Error parsing user from storage:', error);
         return null;
       }
     }
-    console.log('getUserFromStorage - No user in localStorage');
     return null;
   }
 }

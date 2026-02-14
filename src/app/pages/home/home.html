@@ -11,46 +11,15 @@
       </p>
 
       <!-- Search Bar -->
-      <div class="max-w-2xl mx-auto">
-        <div class="flex flex-col md:flex-row gap-3 p-2 bg-gray-50 rounded-xl border border-gray-200">
-          <input
-            type="text"
-            [(ngModel)]="searchKeyword"
-            (keyup.enter)="onSearch()"
-            placeholder="Job title or keyword"
-            class="flex-1 px-4 py-3 bg-white border-0 rounded-lg focus:ring-2 focus:ring-gray-900 focus:outline-none"
-          >
-          <input
-            type="text"
-            [(ngModel)]="searchLocation"
-            (keyup.enter)="onSearch()"
-            placeholder="Location"
-            class="flex-1 px-4 py-3 bg-white border-0 rounded-lg focus:ring-2 focus:ring-gray-900 focus:outline-none"
-          >
-          <button
-            (click)="onSearch()"
-            class="px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition font-medium"
-          >
-            Search
-          </button>
-        </div>
-      </div>
+      <app-search-bar
+        [(keyword)]="searchKeyword"
+        [(location)]="searchLocation"
+        [loading]="loading"
+        (search)="onSearch()"
+      ></app-search-bar>
 
       <!-- Stats -->
-      <div class="flex justify-center gap-12 mt-16 text-sm">
-        <div>
-          <div class="text-2xl font-bold text-gray-900">10K+</div>
-          <div class="text-gray-500">Active Jobs</div>
-        </div>
-        <div>
-          <div class="text-2xl font-bold text-gray-900">5K+</div>
-          <div class="text-gray-500">Companies</div>
-        </div>
-        <div>
-          <div class="text-2xl font-bold text-gray-900">50K+</div>
-          <div class="text-gray-500">Users</div>
-        </div>
-      </div>
+      <app-stats-card [stats]="stats"></app-stats-card>
     </div>
   </section>
 

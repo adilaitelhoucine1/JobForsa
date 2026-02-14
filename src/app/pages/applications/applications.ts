@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Application } from '../../model/application';
 import { ApplicationCard } from '../../components/application-card/application-card';
+import { PageHeader } from '../../components/page-header/page-header';
 import * as ApplicationsActions from '../../store/applications/actions.applications';
 import * as ApplicationsSelectors from '../../store/applications/selectors.applications';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
   selector: 'app-applications',
-  imports: [CommonModule, ApplicationCard],
+  imports: [CommonModule, ApplicationCard, PageHeader],
   templateUrl: './applications.html',
   styleUrl: './applications.css'
 })

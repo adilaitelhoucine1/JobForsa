@@ -1,16 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable, tap} from 'rxjs';
-import {UserResponse} from '../../dto/UserResponse';
-import {Store} from '@ngrx/store';
-import {selectCurrentUser, selectIsAuthenticated} from '../../store/auth/selectors.auth';
-import {CommonModule} from '@angular/common';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { UserResponse } from '../../dto/UserResponse';
+import { Store } from '@ngrx/store';
+import { selectCurrentUser, selectIsAuthenticated } from '../../store/auth/selectors.auth';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PageHeader } from '../../components/page-header/page-header';
+import { ProfileInfoComponent } from '../../components/profile-info/profile-info';
 import * as AuthActions from '../../store/auth/actions.auth';
-import {UpdateProfileRequest} from '../../dto/profile/UpdateProfileRequest';
+import { UpdateProfileRequest } from '../../dto/profile/UpdateProfileRequest';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, PageHeader, ProfileInfoComponent],
   templateUrl: './profile.html',
   styleUrl: './profile.css'
 })

@@ -1,36 +1,20 @@
 <div class="min-h-screen bg-white">
   <div class="container mx-auto px-6 py-12">
     <!-- Page Header -->
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Browse Jobs</h1>
-      <p class="text-gray-600">{{ totalCount | number }} opportunities available</p>
-    </div>
+    <app-page-header
+      title="Browse Jobs"
+      icon="🔍"
+      [subtitle]="(totalCount | number) + ' opportunities available'"
+    ></app-page-header>
 
     <!-- Search Bar -->
     <div class="mb-8">
-      <div class="flex flex-col md:flex-row gap-3 p-2 bg-gray-50 rounded-xl border border-gray-200">
-        <input
-          type="text"
-          [(ngModel)]="keyword"
-          (keyup.enter)="onSearch()"
-          placeholder="Job title or keyword"
-          class="flex-1 px-4 py-3 bg-white border-0 rounded-lg focus:ring-2 focus:ring-gray-900 focus:outline-none text-sm"
-        >
-        <input
-          type="text"
-          [(ngModel)]="location"
-          (keyup.enter)="onSearch()"
-          placeholder="Location"
-          class="flex-1 px-4 py-3 bg-white border-0 rounded-lg focus:ring-2 focus:ring-gray-900 focus:outline-none text-sm"
-        >
-        <button
-          (click)="onSearch()"
-          [disabled]="loading()"
-          class="px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition font-medium text-sm disabled:opacity-50"
-        >
-          {{ loading() ? 'Searching...' : 'Search' }}
-        </button>
-      </div>
+      <app-search-bar
+        [(keyword)]="keyword"
+        [(location)]="location"
+        [loading]="loading()"
+        (search)="onSearch()"
+      ></app-search-bar>
     </div>
 
     <!-- Error Message -->

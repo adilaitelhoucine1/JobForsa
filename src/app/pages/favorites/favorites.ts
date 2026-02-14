@@ -4,13 +4,15 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FavoriteOffer } from '../../model/favorite-offer';
+import { FavoriteCardComponent } from '../../components/favorite-card/favorite-card';
+import { PageHeader } from '../../components/page-header/page-header';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
 import * as FavoritesSelectors from '../../store/favorites/selectors.favorites';
 import * as AuthSelectors from '../../store/auth/selectors.auth';
 
 @Component({
   selector: 'app-favorites',
-  imports: [CommonModule],
+  imports: [CommonModule, FavoriteCardComponent, PageHeader],
   templateUrl: './favorites.html',
   styleUrl: './favorites.css'
 })

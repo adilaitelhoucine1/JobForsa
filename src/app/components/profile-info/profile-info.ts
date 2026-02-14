@@ -1,0 +1,15 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UserResponse } from '../../dto/UserResponse';
+
+@Component({
+  selector: 'app-profile-info',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './profile-info.html',
+  styleUrl: './profile-info.css'
+})
+export class ProfileInfoComponent {
+  @Input() user!: UserResponse;
+}
+
