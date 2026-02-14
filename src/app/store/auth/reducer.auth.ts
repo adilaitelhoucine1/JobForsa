@@ -25,10 +25,10 @@ export  const initialState : authState={
       loading : false
     })),
 
-   on(AuthActions.loginFailure , (state)=>({
+   on(AuthActions.loginFailure, (state, { error }) => ({
      ...state,
-     loading: true,
-     error :"Login Failure"
+     loading: false,
+     error: error
    })),
 
     on(AuthActions.register, (state)=>({
@@ -45,10 +45,10 @@ export  const initialState : authState={
      error: null
    })),
 
-   on(AuthActions.registerFailure , (state)=>({
+   on(AuthActions.registerFailure, (state, { error }) => ({
     ...state,
-     error : "Register Failure",
-     loading : false
+     error: error || 'Registration failed. Please try again.',
+     loading: false
    })),
 
   on(AuthActions.logout , (state)=>({

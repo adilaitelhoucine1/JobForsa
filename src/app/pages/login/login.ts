@@ -30,23 +30,25 @@ export class Login implements OnInit, OnDestroy {
   constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
+  // Getter methods for easy access to form controls
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
   ngOnInit() {
-     this.store.select(selectIsAuthenticated)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(isAuthenticated => {
-        if (isAuthenticated) {
-          this.router.navigate(['/']);
-        }
-      });
+    // ...existing code...
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    // ...existing code...
   }
 
   submitLogin(event: Event) {
@@ -55,6 +57,9 @@ export class Login implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       const loginRequest: LoginRequest = this.loginForm.value;
       this.store.dispatch(AuthActions.login(loginRequest));
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.loginForm.markAllAsTouched();
     }
   }
 }

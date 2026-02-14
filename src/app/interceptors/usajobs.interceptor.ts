@@ -1,5 +1,6 @@
 import { HttpInterceptorFn, HttpRequest, HttpHandlerFn, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export const usaJobsInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
@@ -7,17 +8,14 @@ export const usaJobsInterceptor: HttpInterceptorFn = (
 ): Observable<HttpEvent<unknown>> => {
 
   if (req.url.includes('data.usajobs.gov')) {
-
-
-    // console.log('-------',req.url);
     const clonedRequest = req.clone({
       setHeaders: {
-        'Authorization-Key': 'ME2tsDBQsa/shvTgJLKtQHoySQ77Q9l5QGKkL357YBs='
+        'Authorization-Key': environment.usaJobsApiKey
       }
     });
     return next(clonedRequest);
   }
 
-   return next(req);
+  return next(req);
 };
 

@@ -44,6 +44,14 @@
       "title": "Cyber Threat Analyst",
       "company": "Central Intelligence Agency",
       "location": "Washington, District of Columbia"
+    },
+    {
+      "id": "af96",
+      "userId": 1,
+      "offerId": "756782600",
+      "title": "Targeting Officer",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia"
     }
   ],
   "applications": [

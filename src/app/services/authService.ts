@@ -31,7 +31,7 @@ export class AuthService {
         );
 
         if (!user) {
-          throw new Error('Invalid credentials');
+          throw new Error('Invalid email or password. Please check your credentials and try again.');
         }
 
         const { password, ...userResponse } = user;
