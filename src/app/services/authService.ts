@@ -49,7 +49,7 @@ export class AuthService {
 
     return this.http.post<User>(this.apiUrl, newUser).pipe(
       map(createdUser => {
-        const { password, ...userResponse } = createdUser;
+        const { password, ...userResponse} = createdUser;
         return userResponse as UserResponse;
       }),
       tap(userResponse => this.saveToStorage(userResponse))
@@ -63,6 +63,12 @@ export class AuthService {
         return userResponse as UserResponse;
       }),
       tap(userResponse => this.saveToStorage(userResponse))
+    );
+  }
+
+  deleteUser(userId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${userId}`).pipe(
+      tap(() => this.clearStorage())
     );
   }
 
@@ -96,5 +102,4 @@ export class AuthService {
     return null;
   }
 }
-
 

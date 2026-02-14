@@ -71,6 +71,28 @@ export class AuthEffects {
     )
   );
 
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.deleteUser),
+      switchMap(({ userId }) =>
+        this.authService.deleteUser(userId).pipe(
+          map(() => AuthActions.deleteUserSuccess()),
+          catchError(error => of(AuthActions.deleteUserFailure({ error: error.message })))
+        )
+      )
+    )
+  );
+
+  deleteUserSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.deleteUserSuccess),
+      tap(() => {
+        this.router.navigate(['/login']);
+      })
+    ),
+    { dispatch: false }
+  );
+
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logout),
@@ -82,3 +104,4 @@ export class AuthEffects {
     { dispatch: false }
   );
 }
+

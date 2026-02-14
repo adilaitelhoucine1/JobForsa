@@ -20,6 +20,7 @@ export class Profile implements OnInit {
   isAuthenticated$: Observable<boolean>;
   user$: Observable<UserResponse | null>;
   isEditMode = false;
+  showDeleteConfirm = false;
   profileForm: FormGroup;
   private currentUser: UserResponse | null = null;
 
@@ -80,4 +81,20 @@ export class Profile implements OnInit {
       this.isEditMode = false;
     }
   }
+
+  showDeleteDialog() {
+    this.showDeleteConfirm = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirm = false;
+  }
+
+  confirmDelete() {
+    if (this.currentUser) {
+      this.store.dispatch(AuthActions.deleteUser({ userId: this.currentUser.id }));
+      this.showDeleteConfirm = false;
+    }
+  }
 }
+

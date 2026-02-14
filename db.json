@@ -1,13 +1,6 @@
 {
   "users": [
     {
-      "firstName": "test adil ",
-      "lastName": "Ait El Houcine",
-      "email": "adilaitelhoucine1@gmail.com",
-      "id": "1",
-      "password": "password"
-    },
-    {
       "id": "2",
       "firstName": "Sara",
       "lastName": "El Amrani",

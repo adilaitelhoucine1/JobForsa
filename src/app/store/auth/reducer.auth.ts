@@ -82,5 +82,19 @@ export  const initialState : authState={
         ...state,
         loading: false,
         error
+   })),
+
+   on(AuthActions.deleteUser, state => ({
+      ...state,
+      loading: true,
+      error: null
+   })),
+   on(AuthActions.deleteUserSuccess, () => ({
+      ...initialState
+   })),
+   on(AuthActions.deleteUserFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error
    }))
  )

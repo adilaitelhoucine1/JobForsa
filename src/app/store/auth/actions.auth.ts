@@ -54,3 +54,18 @@ export const loadUserFromStorage = createAction(
    "[Profile]  update Profile Failure",
    props<{error :string}>()
  )
+
+export const deleteUser = createAction(
+  "[Profile] delete user",
+  props<{ userId: number }>()
+)
+
+export const deleteUserSuccess = createAction(
+  "[Profile] delete user success"
+)
+
+export const deleteUserFailure = createAction(
+  "[Profile] delete user failure",
+  props<{ error: string }>()
+)
+
