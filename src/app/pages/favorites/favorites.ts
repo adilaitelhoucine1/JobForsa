@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { FavoriteOffer } from '../../model/favorite-offer';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
 import * as FavoritesSelectors from '../../store/favorites/selectors.favorites';
@@ -21,7 +22,7 @@ export class Favorites implements OnInit {
   error$: Observable<string | null> = this.store.select(FavoritesSelectors.selectFavoritesError);
 
   ngOnInit() {
-    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+    this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       if (user?.id) {
         this.store.dispatch(FavoritesActions.loadFavorites({ userId: Number(user.id) }));
       }

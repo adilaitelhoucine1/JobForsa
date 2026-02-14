@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Application } from '../../model/application';
 import { ApplicationCard } from '../../components/application-card/application-card';
 import * as ApplicationsActions from '../../store/applications/actions.applications';
@@ -22,7 +23,7 @@ export class Applications implements OnInit {
   error$: Observable<string | null> = this.store.select(ApplicationsSelectors.selectApplicationsError);
 
   ngOnInit() {
-    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+    this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       if (user?.id) {
         this.store.dispatch(ApplicationsActions.loadApplications({ userId: Number(user.id) }));
       }

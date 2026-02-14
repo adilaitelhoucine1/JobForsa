@@ -20,12 +20,15 @@
         <a href="/jobs" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
           Browse Jobs
         </a>
-        <a href="/favorites" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
-          Favorites
-        </a>
-        <a href="/applications" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
-          Applications
-        </a>
+        @if (isAuthenticated$ | async) {
+          <a href="/favorites" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+            Favorites
+          </a>
+          <a href="/applications" class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition">
+            Applications
+          </a>
+        }
+
       </nav>
 
       <!-- Right Side Actions -->

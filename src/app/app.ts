@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, afterNextRender } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
@@ -12,18 +12,19 @@ import * as AuthActions from './store/auth/actions.auth';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit {
+export class App {
   protected readonly title = signal('JobForsa');
 
   constructor(
     private store: Store,
     private authService: AuthService
-  ) {}
-
-  ngOnInit(): void {
-     const user = this.authService.getUserFromStorage();
-    if (user) {
-      this.store.dispatch(AuthActions.loadUserFromStorage({ user }));
-    }
+  ) {
+    // afterNextRender only runs in the browser, never during SSR
+    afterNextRender(() => {
+      const user = this.authService.getUserFromStorage();
+      if (user) {
+        this.store.dispatch(AuthActions.loadUserFromStorage({ user }));
+      }
+    });
   }
 }

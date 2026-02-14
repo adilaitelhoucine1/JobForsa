@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "firstName": "adil",
+      "firstName": "test adil ",
       "lastName": "Ait El Houcine",
       "email": "adilaitelhoucine1@gmail.com",
       "id": "1",
@@ -38,18 +38,10 @@
   ],
   "favoritesOffers": [
     {
-      "id": "cefe",
+      "id": "1193",
       "userId": 1,
       "offerId": "722102800",
       "title": "Cyber Threat Analyst",
-      "company": "Central Intelligence Agency",
-      "location": "Washington, District of Columbia"
-    },
-    {
-      "id": "4457",
-      "userId": 1,
-      "offerId": "722317000",
-      "title": "Resource Analyst",
       "company": "Central Intelligence Agency",
       "location": "Washington, District of Columbia"
     }
@@ -69,19 +61,6 @@
       "dateAdded": "2026-02-05T09:00:00Z"
     },
     {
-      "id": "c53f",
-      "userId": 1,
-      "offerId": "722102800",
-      "apiSource": "USAJobs",
-      "title": "Cyber Threat Analyst",
-      "company": "Central Intelligence Agency",
-      "location": "Washington, District of Columbia",
-      "url": "https://www.usajobs.gov:443/job/722102800",
-      "status": "APPLIED",
-      "notes": "ff",
-      "dateAdded": "2026-02-12T15:30:34.816Z"
-    },
-    {
       "id": "a96b",
       "userId": 1,
       "offerId": "722317000",
@@ -95,17 +74,43 @@
       "dateAdded": "2026-02-12T16:22:14.838Z"
     },
     {
-      "id": "0621",
+      "id": "b6c2",
       "userId": 1,
-      "offerId": "723123400",
+      "offerId": "736239300",
       "apiSource": "USAJobs",
-      "title": "Technical Targeting Analyst",
-      "company": "Central Intelligence Agency",
-      "location": "Washington, District of Columbia",
-      "url": "https://www.usajobs.gov:443/job/723123400",
+      "title": "WASTEWATER TREATMENT PLANT OPERATOR",
+      "company": "U.S. Marine Corps",
+      "location": "Cherry Point, North Carolina",
+      "url": "https://www.usajobs.gov:443/job/736239300",
       "status": "PENDING",
       "notes": "",
-      "dateAdded": "2026-02-12T16:24:16.620Z"
+      "dateAdded": "2026-02-13T08:28:05.641Z"
+    },
+    {
+      "id": "47fc",
+      "userId": 1,
+      "offerId": "756737500",
+      "apiSource": "USAJobs",
+      "title": "Collection Management Officer",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/756737500",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-13T11:19:12.236Z"
+    },
+    {
+      "id": "7760",
+      "userId": 1,
+      "offerId": "756734700",
+      "apiSource": "USAJobs",
+      "title": "Case Officer",
+      "company": "Central Intelligence Agency",
+      "location": "Washington, District of Columbia",
+      "url": "https://www.usajobs.gov:443/job/756734700",
+      "status": "PENDING",
+      "notes": "",
+      "dateAdded": "2026-02-13T11:19:32.115Z"
     }
   ]
 }

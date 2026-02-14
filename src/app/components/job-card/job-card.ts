@@ -29,7 +29,7 @@ export class JobCard implements OnInit {
   isAuthenticated$!: Observable<boolean>;
 
   ngOnInit() {
-    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+    this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       this.currentUserId = user?.id ? Number(user.id) : null;
     });
 

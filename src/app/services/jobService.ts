@@ -29,7 +29,6 @@ export class JobService {
 
      const page = searchParams.page ?? 1;
     params = params.set('Page', page.toString());
-
      const resultsPerPage = searchParams.resultsPerPage ?? 4;
     params = params.set('ResultsPerPage', resultsPerPage.toString());
 

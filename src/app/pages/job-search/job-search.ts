@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 import {JobOffer} from '../../model/offer';
 import {JobSearchParams} from '../../dto/jobOffer/JobSearchParams';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
@@ -36,15 +37,12 @@ export class JobSearch implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Load user favorites and applications
-    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+    // Load user favorites and applications once
+    this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       if (user?.id) {
         const userId = Number(user.id);
-        console.log('JobSearch: Loading favorites and applications for user:', userId);
         this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
         this.store.dispatch(ApplicationsActions.loadApplications({ userId }));
-      } else {
-        console.log('JobSearch: No user logged in');
       }
     });
 

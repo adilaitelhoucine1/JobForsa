@@ -1,18 +1,38 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { JobSearch } from './pages/job-search/job-search';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
-import { Favorites } from './pages/favorites/favorites';
-import { Applications } from './pages/applications/applications';
-import { Profile } from './pages/profile/profile';
+import { AuthGuard } from './guard/auth-guard';
+import { VisiteurGuard } from './guard/visiteur-guard';
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'jobs', component: JobSearch },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
-  { path: 'favorites', component: Favorites },
-  { path: 'applications', component: Applications },
-  { path: 'profile', component: Profile }
+  {
+    path: '',
+    loadComponent: () => import('./pages/home/home').then(m => m.Home)
+  },
+  {
+    path: 'jobs',
+    loadComponent: () => import('./pages/job-search/job-search').then(m => m.JobSearch)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login').then(m => m.Login),
+   },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register').then(m => m.Register),
+   canActivate: [VisiteurGuard]
+  },
+  {
+    path: 'favorites',
+    loadComponent: () => import('./pages/favorites/favorites').then(m => m.Favorites),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'applications',
+    loadComponent: () => import('./pages/applications/applications').then(m => m.Applications),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile').then(m => m.Profile),
+    canActivate: [AuthGuard]
+  },
 ];

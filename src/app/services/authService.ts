@@ -81,18 +81,27 @@ export class AuthService{
   }
 
   getUserFromStorage(): UserResponse | null {
+    console.log('getUserFromStorage - isBrowser:', this.isBrowser);
+
     if (!this.isBrowser) {
+      console.log('getUserFromStorage - Not browser, returning null');
       return null;
     }
 
     const userStr = localStorage.getItem('user');
+    console.log('getUserFromStorage - userStr from localStorage:', userStr);
+
     if (userStr) {
       try {
-        return JSON.parse(userStr);
-      } catch {
+        const user = JSON.parse(userStr);
+        console.log('getUserFromStorage - Parsed user:', user);
+        return user;
+      } catch (error) {
+        console.log('getUserFromStorage - Parse error:', error);
         return null;
       }
     }
+    console.log('getUserFromStorage - No user in localStorage');
     return null;
   }
 }

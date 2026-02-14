@@ -1,10 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { JobCard } from '../../components/job-card/job-card';
 import { JobService } from '../../services/jobService';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { take } from 'rxjs/operators';
 import {JobOffer} from '../../model/offer';
 import * as FavoritesActions from '../../store/favorites/actions.favorites';
 import * as ApplicationsActions from '../../store/applications/actions.applications';
@@ -30,15 +32,11 @@ export class Home implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Load user favorites and applications
-    this.store.select(AuthSelectors.selectCurrentUser).subscribe(user => {
+     this.store.select(AuthSelectors.selectCurrentUser).pipe(take(1)).subscribe(user => {
       if (user?.id) {
         const userId = Number(user.id);
-        console.log('Home: Loading favorites and applications for user:', userId);
         this.store.dispatch(FavoritesActions.loadFavorites({ userId }));
         this.store.dispatch(ApplicationsActions.loadApplications({ userId }));
-      } else {
-        console.log('Home: No user logged in');
       }
     });
 
@@ -51,7 +49,7 @@ export class Home implements OnInit {
       resultsPerPage: 6
     }).subscribe({
       next: (result) => {
-        this.featuredJobs = result.jobs.slice(0, 6); // Show first 6 jobs
+        this.featuredJobs = result.jobs.slice(0, 6);
         this.loading = false;
       },
       error: (err) => {
